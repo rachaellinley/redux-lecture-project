@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
+import { connect } from "react-redux";
+import {updateUsername} from "../redux/reducer"
 
-export default class Login extends Component {
+class Login extends Component {
     constructor() {
         super();
         this.state = {
@@ -15,7 +17,8 @@ export default class Login extends Component {
     handleUsernameChange(e) {
         this.setState({
             username: e.target.value
-        })
+        });
+        this.props.updateUsername(e.target.value);
     }
 
     handlePasswordChange(e) {
@@ -34,3 +37,9 @@ export default class Login extends Component {
         )
     }
 }
+
+export default connect(undefined, {updateUsername})(Login);
+
+//connect is a function that returns a function >> a closure, a non traditional one 
+// first and second parameter 
+//make changes using the second parameter 
